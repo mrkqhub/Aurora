@@ -254,6 +254,7 @@
 			<CommonModule>аа_ПредопределенныеЗначенияКлиент</CommonModule>
 			<CommonModule>аа_ПредопределенныеЗначенияВызовСервера</CommonModule>
 			<CommonModule>аа_ПредопределенныеЗначения</CommonModule>
+			<CommonModule>аа_ПредопределенныеЗначенияПовтИсп</CommonModule>
 			<FunctionalOption>аа_ИспользоватьПредопределенныеЗначения</FunctionalOption>
 			<Constant>аа_ИспользоватьПредопределенныеЗначения</Constant>
 			<ChartOfCharacteristicTypes>аа_ПредопределенныеЗначения</ChartOfCharacteristicTypes>
