@@ -251,6 +251,9 @@
 		<ChildObjects>
 			<Language>Русский</Language>
 			<Subsystem>аа_Аврора</Subsystem>
+			<Role>аа_БазовыеПрава</Role>
+			<Role>аа_ЧтениеПредопределенныеЗначения</Role>
+			<Role>аа_ДобавлениеИзменениеПредопределенныеЗначения</Role>
 			<CommonModule>аа_ПредопределенныеЗначенияКлиент</CommonModule>
 			<CommonModule>аа_ПредопределенныеЗначенияВызовСервера</CommonModule>
 			<CommonModule>аа_ПредопределенныеЗначения</CommonModule>
