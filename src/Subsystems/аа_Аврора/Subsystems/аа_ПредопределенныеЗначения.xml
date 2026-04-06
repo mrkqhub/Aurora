@@ -17,6 +17,13 @@
 			<Picture/>
 			<Content>
 				<xr:Item xsi:type="xr:MDObjectRef">ChartOfCharacteristicTypes.аа_ПредопределенныеЗначения</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">CommonModule.аа_ПредопределенныеЗначенияКлиент</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">CommonModule.аа_ПредопределенныеЗначенияВызовСервера</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">CommonModule.аа_ПредопределенныеЗначения</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">CommonModule.аа_ПредопределенныеЗначенияПовтИсп</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">CommonModule.аа_ПредопределенныеЗначенияПереопределяемый</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Role.аа_ЧтениеПредопределенныеЗначения</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Role.аа_ДобавлениеИзменениеПредопределенныеЗначения</xr:Item>
 			</Content>
 		</Properties>
 		<ChildObjects/>
