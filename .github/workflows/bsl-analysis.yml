@@ -20,7 +20,7 @@ jobs:
       - name: Download BSL Language Server
         run: |
           curl -L -o bsl-language-server.jar \
-            "https://github.com/1c-syntax/bsl-language-server/releases/download/v0.28.4/bsl-language-server.jar"
+            "https://github.com/1c-syntax/bsl-language-server/releases/download/v0.28.5/bsl-language-server-0.28.5-exec.jar"
 
       - name: Run analysis
         run: |
