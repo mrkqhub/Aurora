@@ -1,0 +1,38 @@
+name: BSL Analysis
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Download BSL Language Server
+        run: |
+          curl -L -o bsl-language-server.jar \
+            https://github.com/1c-syntax/bsl-language-server/releases/latest/download/bsl-language-server.jar
+
+      - name: Run analysis
+        run: |
+          java -Xmx2g -jar bsl-language-server.jar \
+            --analyze \
+            --srcDir ./src \
+            --reporter console \
+            --reporter json
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bsl-report
+          path: ./bsl-json.json
