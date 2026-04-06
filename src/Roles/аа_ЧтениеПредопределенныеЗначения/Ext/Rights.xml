@@ -19,6 +19,13 @@
 		</right>
 	</object>
 	<object>
+		<name>ChartOfCharacteristicTypes.аа_ПредопределенныеЗначения.Command.НастройкиИПредопределенныеЗначения</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Configuration.Аврора</name>
 		<right>
 			<name>MainWindowModeNormal</name>
