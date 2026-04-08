@@ -68,3 +68,4 @@ jobs:
                   count += 1
 
           print(f'Всего замечаний: {count}', file=sys.stderr)
+          "
