@@ -31,7 +31,40 @@ jobs:
             --srcDir ./src \
             --reporter json
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v6
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Annotate PR with BSL issues
+        if: always()
+        run: |
+          python3 -c "
+          import json, urllib.parse, sys, os
+
+          with open('bsl-json.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+
+          severity_map = {
+              'Error': 'error',
+              'Warning': 'warning',
+              'Info': 'notice'
+          }
+
+          count = 0
+          for fileinfo in data.get('fileinfos', []):
+              path = urllib.parse.unquote(fileinfo.get('path', ''))
+              # убираем file:/// и оставляем относительный путь
+              path = path.replace('file:///', '')
+              # убираем абсолютную часть пути до src
+              if '/home/runner/work/' in path:
+                  parts = path.split('/')
+                  src_idx = next((i for i, p in enumerate(parts) if p == 'src'), None)
+                  if src_idx:
+                      path = '/'.join(parts[src_idx:])
+
+              for diag in fileinfo.get('diagnostics', []):
+                  level = severity_map.get(diag.get('severity', 'Info'), 'notice')
+                  line = diag.get('range', {}).get('start', {}).get('line', 0) + 1
+                  col = diag.get('range', {}).get('start', {}).get('character', 0) + 1
+                  message = diag.get('message', '').replace('%', '%25').replace('\n', '%0A').replace('\r', '%0D')
+                  code = diag.get('code', '')
+                  print(f'::{level} file={path},line={line},col={col}::{code}: {message}')
+                  count += 1
+
+          print(f'Всего замечаний: {count}', file=sys.stderr)
