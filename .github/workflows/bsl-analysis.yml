@@ -36,19 +36,22 @@ jobs:
             --srcDir ./src \
             --reporter json
 
+      - name: Install reviewdog
+        if: always()
+        run: |
+          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
+
       - name: Annotate PR with BSL issues
         if: always()
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 -c "
           import json, urllib.parse, sys
+
           with open('bsl-json.json', 'r', encoding='utf-8') as f:
               data = json.load(f)
-          severity_map = {
-              'Error': 'error',
-              'Warning': 'warning',
-              'Info': 'notice'
-          }
-          count = 0
+
           for fileinfo in data.get('fileinfos', []):
               path = urllib.parse.unquote(fileinfo.get('path', ''))
               path = path.replace('file:///', '')
@@ -56,13 +59,15 @@ jobs:
               if src_pos == -1:
                   continue
               path = path[src_pos:]
+
               for diag in fileinfo.get('diagnostics', []):
-                  level = severity_map.get(diag.get('severity', 'Info'), 'notice')
                   line = diag.get('range', {}).get('start', {}).get('line', 0) + 1
                   col = diag.get('range', {}).get('start', {}).get('character', 0) + 1
-                  message = diag.get('message', '').replace('%', '%25').replace('\n', '%0A').replace('\r', '%0D')
+                  message = diag.get('message', '').replace('\n', ' ')
                   code = diag.get('code', '')
-                  print(f'::{level} file={path},line={line},col={col}::{code}: {message}')
-                  count += 1
-          print(f'::notice::Всего замечаний: {count}')
-          "
+                  print(f'{path}:{line}:{col}: {code}: {message}')
+          " | reviewdog \
+              -efm="%f:%l:%c: %m" \
+              -name="BSL Analysis" \
+              -reporter=github-pr-review \
+              -level=warning
