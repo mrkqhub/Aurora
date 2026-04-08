@@ -252,13 +252,14 @@
 			<Language>Русский</Language>
 			<Subsystem>аа_Аврора</Subsystem>
 			<Role>аа_БазовыеПрава</Role>
-			<Role>аа_ЧтениеПредопределенныеЗначения</Role>
 			<Role>аа_ДобавлениеИзменениеПредопределенныеЗначения</Role>
-			<CommonModule>аа_ПредопределенныеЗначенияКлиент</CommonModule>
-			<CommonModule>аа_ПредопределенныеЗначенияВызовСервера</CommonModule>
+			<Role>аа_ЧтениеПредопределенныеЗначения</Role>
+			<Role>аа_ТехническийСпециалист</Role>
 			<CommonModule>аа_ПредопределенныеЗначения</CommonModule>
-			<CommonModule>аа_ПредопределенныеЗначенияПовтИсп</CommonModule>
+			<CommonModule>аа_ПредопределенныеЗначенияВызовСервера</CommonModule>
+			<CommonModule>аа_ПредопределенныеЗначенияКлиент</CommonModule>
 			<CommonModule>аа_ПредопределенныеЗначенияПереопределяемый</CommonModule>
+			<CommonModule>аа_ПредопределенныеЗначенияПовтИсп</CommonModule>
 			<FunctionalOption>аа_ИспользоватьПредопределенныеЗначения</FunctionalOption>
 			<Constant>аа_ИспользоватьПредопределенныеЗначения</Constant>
 			<ChartOfCharacteristicTypes>аа_ПредопределенныеЗначения</ChartOfCharacteristicTypes>
