@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       - uses: actions/setup-java@v4
         with:
@@ -27,14 +29,9 @@ jobs:
           java -Xmx2g -jar bsl-language-server.jar \
             --analyze \
             --srcDir ./src \
-            --reporter console \
             --reporter json
-        env:
-          JAVA_TOOL_OPTIONS: "-Dfile.encoding=UTF-8"
 
-      - name: Upload report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: bsl-report
-          path: ./bsl-json.json
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
