@@ -35,14 +35,10 @@ jobs:
         if: always()
         run: |
           python3 -c "
-          import json, urllib.parse, sys, os
+          import json, urllib.parse, sys
 
           with open('bsl-json.json', 'r', encoding='utf-8') as f:
               data = json.load(f)
-
-          # выводим первый путь как есть для отладки
-          for fileinfo in data.get('fileinfos', [])[:1]:
-              print('RAW PATH:', fileinfo.get('path', ''), file=sys.stderr)
 
           severity_map = {
               'Error': 'error',
@@ -54,6 +50,20 @@ jobs:
           for fileinfo in data.get('fileinfos', []):
               path = urllib.parse.unquote(fileinfo.get('path', ''))
               path = path.replace('file:///', '')
-              print('DECODED PATH:', path, file=sys.stderr)
-              break
+              # оставляем только часть начиная с src/
+              src_pos = path.find('src/')
+              if src_pos == -1:
+                  continue
+              path = path[src_pos:]
+
+              for diag in fileinfo.get('diagnostics', []):
+                  level = severity_map.get(diag.get('severity', 'Info'), 'notice')
+                  line = diag.get('range', {}).get('start', {}).get('line', 0) + 1
+                  col = diag.get('range', {}).get('start', {}).get('character', 0) + 1
+                  message = diag.get('message', '').replace('%', '%25').replace('\n', '%0A').replace('\r', '%0D')
+                  code = diag.get('code', '')
+                  print(f'::{level} file={path},line={line},col={col}::{code}: {message}')
+                  count += 1
+
+          print(f'::notice::Всего замечаний: {count}')
           "
