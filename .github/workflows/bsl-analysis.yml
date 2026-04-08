@@ -29,6 +29,8 @@ jobs:
             --srcDir ./src \
             --reporter console \
             --reporter json
+        env:
+          JAVA_TOOL_OPTIONS: "-Dfile.encoding=UTF-8"
 
       - name: Upload report
         if: always()
