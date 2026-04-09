@@ -1,4 +1,4 @@
-name: BSL Analysis
+name: SonarQube
 
 on:
   push:
@@ -19,58 +19,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Download BSL Language Server
-        run: |
-          curl -L -o bsl-language-server.jar \
-            "https://github.com/1c-syntax/bsl-language-server/releases/download/v0.28.5/bsl-language-server-0.28.5-exec.jar"
-
-      - name: Run analysis
-        run: |
-          java -Xmx2g -jar bsl-language-server.jar \
-            --analyze \
-            --srcDir ./src \
-            --reporter json
-
-      - name: Install reviewdog
-        if: always()
-        run: |
-          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
-
-      - name: Annotate PR with BSL issues
-        if: always()
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
         env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python3 -c "
-          import json, urllib.parse, sys
-
-          with open('bsl-json.json', 'r', encoding='utf-8') as f:
-              data = json.load(f)
-
-          for fileinfo in data.get('fileinfos', []):
-              path = urllib.parse.unquote(fileinfo.get('path', ''))
-              path = path.replace('file:///', '')
-              src_pos = path.find('src/')
-              if src_pos == -1:
-                  continue
-              path = path[src_pos:]
-
-              for diag in fileinfo.get('diagnostics', []):
-                  severity = diag.get('severity', '')
-                  if severity not in ('Error', 'Warning'):
-                      continue
-                  line = diag.get('range', {}).get('start', {}).get('line', 0) + 1
-                  col = diag.get('range', {}).get('start', {}).get('character', 0) + 1
-                  message = diag.get('message', '').replace('\n', ' ')
-                  code = diag.get('code', '')
-                  print(f'{path}:{line}:{col}: {code}: {message}')
-          " | reviewdog \
-              -efm="%f:%l:%c: %m" \
-              -name="BSL Analysis" \
-              -reporter=github-pr-review \
-              -level=warning
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
