@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.19">
+	<WindowOpeningMode>LockWholeInterface</WindowOpeningMode>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<Autofill>false</Autofill>
+		<ChildItems>
+			<Button name="ФормаАдаптироватьКонфигурацию" id="4">
+				<Type>CommandBarButton</Type>
+				<DefaultButton>true</DefaultButton>
+				<CommandName>Form.Command.АдаптироватьКонфигурацию</CommandName>
+				<ExtendedTooltip name="ФормаАдаптироватьКонфигурациюРасширеннаяПодсказка" id="5"/>
+			</Button>
+		</ChildItems>
+	</AutoCommandBar>
+	<Events>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<InputField name="ПутьИсходныхФайлов" id="1">
+			<DataPath>ПутьИсходныхФайлов</DataPath>
+			<ChoiceButton>true</ChoiceButton>
+			<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+			<TextEdit>false</TextEdit>
+			<ContextMenu name="ПутьИсходныхФайловКонтекстноеМеню" id="2"/>
+			<ExtendedTooltip name="ПутьИсходныхФайловРасширеннаяПодсказка" id="3"/>
+			<Events>
+				<Event name="StartChoice">ПутьИсходныхФайловНачалоВыбора</Event>
+			</Events>
+		</InputField>
+		<InputField name="ПутьСохранения" id="6">
+			<DataPath>ПутьСохранения</DataPath>
+			<ChoiceButton>true</ChoiceButton>
+			<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+			<TextEdit>false</TextEdit>
+			<ContextMenu name="ПутьСохраненияКонтекстноеМеню" id="7"/>
+			<ExtendedTooltip name="ПутьСохраненияРасширеннаяПодсказка" id="8"/>
+			<Events>
+				<Event name="StartChoice">ПутьСохраненияНачалоВыбора</Event>
+			</Events>
+		</InputField>
+		<UsualGroup name="ГруппаПрефиксСуфикс" id="12">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа префикс/суфикс</v8:content>
+				</v8:item>
+			</Title>
+			<Group>AlwaysHorizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ГруппаПрефиксСуфиксРасширеннаяПодсказка" id="13"/>
+			<ChildItems>
+				<UsualGroup name="ГруппаПрефиксСуфиксЛево" id="14">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа префикс/суфикс (лево)</v8:content>
+						</v8:item>
+					</Title>
+					<Group>Vertical</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="ГруппаПрефиксСуфиксЛевоРасширеннаяПодсказка" id="15"/>
+					<ChildItems>
+						<CheckBoxField name="ЗаменятьПрефиксыСуфиксы" id="9">
+							<DataPath>ЗаменятьПрефиксыСуфиксы</DataPath>
+							<TitleLocation>Right</TitleLocation>
+							<TitleHeight>2</TitleHeight>
+							<VerticalAlign>Center</VerticalAlign>
+							<CheckBoxType>Auto</CheckBoxType>
+							<ContextMenu name="ЗаменятьПрефиксыСуфиксыКонтекстноеМеню" id="10"/>
+							<ExtendedTooltip name="ЗаменятьПрефиксыСуфиксыРасширеннаяПодсказка" id="11"/>
+							<Events>
+								<Event name="OnChange">ЗаменятьПрефиксыСуфиксыПриИзменении</Event>
+							</Events>
+						</CheckBoxField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="ГруппаПрефиксСуфиксПраво" id="16">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа префикс/суфикс (право)</v8:content>
+						</v8:item>
+					</Title>
+					<Group>Vertical</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="ГруппаПрефиксСуфиксПравоРасширеннаяПодсказка" id="17"/>
+					<ChildItems>
+						<InputField name="Префикс" id="18">
+							<DataPath>Префикс</DataPath>
+							<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+							<InputHint>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>без префикса</v8:content>
+								</v8:item>
+							</InputHint>
+							<ContextMenu name="ПрефиксКонтекстноеМеню" id="19"/>
+							<ExtendedTooltip name="ПрефиксРасширеннаяПодсказка" id="20"/>
+						</InputField>
+						<InputField name="Суфикс" id="21">
+							<DataPath>Суфикс</DataPath>
+							<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+							<InputHint>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>без суфикса</v8:content>
+								</v8:item>
+							</InputHint>
+							<ContextMenu name="СуфиксКонтекстноеМеню" id="22"/>
+							<ExtendedTooltip name="СуфиксРасширеннаяПодсказка" id="23"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+			</ChildItems>
+		</UsualGroup>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Объект" id="1">
+			<Type>
+				<v8:Type>cfg:ExternalDataProcessorObject.аа_ПервоеВнедрение</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+		</Attribute>
+		<Attribute name="ПутьИсходныхФайлов" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Путь исходных файлов</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+			<FillCheck>ShowError</FillCheck>
+		</Attribute>
+		<Attribute name="ЗаменятьПрефиксыСуфиксы" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Заменять префиксы/суфиксы</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ПутьСохранения" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Путь сохранения</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+			<FillCheck>ShowError</FillCheck>
+		</Attribute>
+		<Attribute name="Префикс" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Префикс</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Суфикс" id="6">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Суфикс</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="АдаптироватьКонфигурацию" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Адаптировать конфигурацию</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Адаптировать конфигурацию</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Picture>
+				<xr:Ref>StdPicture.SaveFile</xr:Ref>
+				<xr:LoadTransparent>true</xr:LoadTransparent>
+			</Picture>
+			<Action>АдаптироватьКонфигурацию</Action>
+			<Representation>TextPicture</Representation>
+		</Command>
+	</Commands>
+</Form>
