@@ -1,0 +1,1 @@
+{"config":{"lang":["ru"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"],"fields":{"title":{"boost":1000.0},"text":{"boost":1.0},"tags":{"boost":1000000.0}}},"docs":[{"location":"","title":"\u0413\u043b\u0430\u0432\u043d\u0430\u044f","text":"<p>\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u044f</p>"}]}
