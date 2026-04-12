@@ -1,0 +1,9 @@
+site_name: Aurora
+site_url: https://mrkqhub.github.io/Aurora
+
+theme:
+  name: material
+  language: ru
+
+nav:
+  - Главная: index.md

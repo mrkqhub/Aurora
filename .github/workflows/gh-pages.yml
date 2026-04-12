@@ -1,0 +1,71 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/gh-pages.yml'
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install mkdocs mkdocs-material pygments-bsl
+
+      - name: Download latest GitHub Pages
+        run: |
+          wget https://github.com/mrkqhub/Aurora/archive/gh-pages.zip || true
+          unzip gh-pages.zip || true
+
+      - name: Prepare public (push to main)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mkdir public
+          cp -R Aurora-gh-pages/dev/. public/dev || true
+
+      - name: Prepare public (push to dev)
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          mkdir public
+          cp -R Aurora-gh-pages/. public || true
+          rm -rf public/dev || true
+          mkdir public/dev
+
+      - name: Patch mkdocs for dev
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          sed -i "s%https://mrkqhub.github.io/Aurora%https://mrkqhub.github.io/Aurora/dev%g" mkdocs.yml
+
+      - name: Build (main → root)
+        if: github.ref == 'refs/heads/main'
+        run: mkdocs build --site-dir public
+
+      - name: Build (dev → /dev)
+        if: github.ref == 'refs/heads/dev'
+        run: mkdocs build --site-dir public/dev
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
