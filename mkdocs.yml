@@ -1,9 +1,58 @@
 site_name: Aurora
-site_url: https://mrkqhub.github.io/Aurora
+
+nav:
+  - Домашняя:
+    - index.md
+    - subsystems.md
+    - firstImplementation.md
+  - Документация:
+    - subsystems/predefinedValues.md
 
 theme:
   name: material
   language: ru
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: cyan
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
 
-nav:
-  - Главная: index.md
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: cyan
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - search.highlight
+    - toc.integrate
+    - header.autohide
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: 'https://github.com/mrkqhub'
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - markdown.extensions.toc:
+      permalink: true
+      slugify: !!python/name:pymdownx.slugs.uslugify_cased
+      toc_depth: 2
+
+plugins:
+  - search:
+      lang:
+        - ru
+
+site_url: 'https://mrkqhub.github.io/Aurora'
+repo_name: 'mrkqhub/Aurora'
+repo_url: 'https://github.com/mrkqhub/Aurora'
