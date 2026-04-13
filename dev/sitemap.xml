@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mrkqhub.github.io/Aurora/dev/</loc>
-         <lastmod>2026-04-12</lastmod>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://mrkqhub.github.io/Aurora/dev/firstImplementation/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://mrkqhub.github.io/Aurora/dev/subsystems/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://mrkqhub.github.io/Aurora/dev/subsystems/predefinedValues/</loc>
+         <lastmod>2026-04-13</lastmod>
     </url>
 </urlset>
